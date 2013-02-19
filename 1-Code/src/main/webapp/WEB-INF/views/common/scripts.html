@@ -1,0 +1,21 @@
+<script src="${ctx}/resources/jquery/jquery-1.6.2.min.js" type="text/javascript"></script>
+<script src="${ctx}/resources/ligerui/js/ligerui.min.js" type="text/javascript"></script>
+<script src="${ctx}/resources/zTree/js/jquery.ztree.all-3.5.js" type="text/javascript" ></script>
+<script type="text/javascript">
+
+	function _href(url,target){
+		if(null != url && "" != url && "#" != url && typeof(url) != 'undefined'){
+			if(null != target && "" != target && typeof(target) != 'undefined'){
+				$(target).load(url);
+			}else{
+				window.location = url;
+			}
+		}
+	}
+	
+	$('.ajaxify').bind("click",function(event){
+		event.preventDefault();  //关键是这句
+		_href(this.href,this.target);
+	});
+	
+</script>

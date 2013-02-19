@@ -1,0 +1,24 @@
+<#assign ctx=(rc.getContextPath())!''>
+<SCRIPT type="text/javascript">
+		function zTreeOnClick(event, treeId, treeNode) {
+		    if('table' == treeNode.type){
+		    	_href('${ctx}/dbview/data?schema='+treeNode.schema+'&table='+treeNode.table,'#tableData');
+		    }
+		};
+		
+		var setting = {
+			view: {
+				selectedMulti: false
+			},
+			callback: {
+				onClick: zTreeOnClick
+			},
+			async: {
+				enable: true,
+				url:"${ctx}/dbview/view",
+				autoParam:["schema", "table", "type"]
+			}
+		};
+	
+	    $.fn.zTree.init($("#treeDemo"), setting);
+</SCRIPT>

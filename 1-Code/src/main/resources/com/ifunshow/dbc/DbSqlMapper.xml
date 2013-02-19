@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapper>
+	<sql id="MYSQL.QUERY_ALL_SCHEMAS_SQL">
+		<![CDATA[
+			SELECT
+			  SCHEMA_NAME
+			FROM information_schema.SCHEMATA
+		]]>
+	</sql>
+	<sql id="MYSQL.QUERY_TABLES_BY_SCHEMA_SQL">
+		<![CDATA[
+			SELECT
+			  TABLE_NAME,
+			  TABLE_COMMENT
+			FROM information_schema.TABLES
+			WHERE TABLE_SCHEMA = ?
+		]]>
+	</sql>
+	<sql id="MYSQL.QUERY_TABLE_COLUMNS_BY_SCHEMA_TABLE_SQL">
+		<![CDATA[
+			SELECT
+			  COLUMN_NAME,
+			  DATA_TYPE,
+			  COLUMN_TYPE,
+			  IS_NULLABLE,
+			  COLUMN_DEFAULT,
+			  COLUMN_COMMENT,
+			  ORDINAL_POSITION
+			FROM information_schema.COLUMNS
+			WHERE TABLE_SCHEMA = ?
+			    AND TABLE_NAME = ?
+		]]>
+	</sql>
+	<sql id="MYSQL.QUERY_TABLE_DATA_SQL">
+		<![CDATA[
+			SELECT * FROM {SCHEMA}.{TABLE} LIMIT ?,?
+		]]>
+	</sql>
+</mapper>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<#include "/common/meta.html"/>
+		<style type="text/css"> 
+		    body,html{height:100%;}
+		    body{ padding:0px; margin:0;   overflow:hidden;}  
+		    .l-link{ display:block; height:26px; line-height:26px; padding-left:10px; text-decoration:underline; color:#333;}
+		    .l-link2{text-decoration:underline; color:white; margin-left:2px;margin-right:2px;}
+		    .l-layout-top{background:#102A49; color:White;}
+		    .l-layout-bottom{ background:#E5EDEF; text-align:center;}
+		    #pageloading{position:absolute; left:0px; top:0px; background:white url('${ctx}/resources/ligerui/images/loading.gif') no-repeat center; width:100%; height:100%;z-index:99999;}
+		    .l-link{ display:block; line-height:22px; height:22px; padding-left:16px;border:1px solid white; margin:4px;}
+		    .l-link-over{ background:#FFEEAC; border:1px solid #DB9F00;} 
+		    .l-winbar{ background:#2B5A76; height:30px; position:absolute; left:0px; bottom:0px; width:100%; z-index:99999;}
+		    .space{ color:#E7E7E7;}
+		    /* 顶部 */ 
+		    .l-topmenu{ margin:0; padding:0; height:31px; line-height:31px; position:relative; border-top:1px solid #1D438B;  }
+		    .l-topmenu-logo{ color:#E7E7E7; padding-left:35px; line-height:26px;}
+		    .l-topmenu-welcome{  position:absolute; height:24px; line-height:24px;  right:30px; top:2px;color:#070A0C;}
+		    .l-topmenu-welcome a{ color:#E7E7E7; text-decoration:underline} 
+		
+		 </style>
+	</head>
+	<body style="padding:0px;">
+		<#include "/common/navbar.html"/>
+		<div id='layoutDiv' style="width:99.2%; margin:0 auto; margin-top:4px; ">
+			<div position="left" id="treeDiv" title="root@localhost">
+				<div title="schema" class="l-scroll">
+					<ul id="treeDemo" class="ztree"></ul>
+				</div>
+				<div title="其它">
+				</div>
+			</div>
+			<div position="center" id='center'>
+				<div id="navtab1" style="width: 100%;height:60%;overflow:hidden; border:1px solid #A3C0E8; ">
+					<div title="Query" showClose="true"></div>
+					<div title="Query" showClose="true"></div>
+				</div>
+				<div id="navtab2" style="width: 100%;height:70%;overflow:hidden; border:1px solid #A3C0E8; ">
+					<div title="表数据" id="tableData"></div>
+					<div title="表信息" id="tableInfo"></div>
+				</div>
+			</div>
+		</div>
+		<#include "/common/footer.html"/>
+		<#include "/common/scripts.html"/>
+		<SCRIPT type="text/javascript">
+		    var accordion = null;
+		    $(function (){
+		    	
+		        $("#topmenu").ligerMenuBar({ items: [
+		                                             { text: '文件', menu: menu1 ,img: "${ctx}/resources/zTree/css/zTreeStyle/img/dbc/database.png" },
+		                                             { text: '导出', menu: menu2 }
+		                                         ]
+		                                         });
+		    	
+			    accordion = $("#treeDiv").ligerGetAccordionManager();
+	            //布局
+	            $("#layoutDiv").ligerLayout({ leftWidth: 190, height: '100%',heightDiff:-20,space:4, onHeightChanged: f_heightChanged });
+	            var height = $(".l-layout-center").height();
+	            //面板
+	            $("#treeDiv").ligerAccordion({ height: height - 24, speed: null });
+	            $("#navtab1").ligerTab();
+	            $("#navtab2").ligerTab();	            
+	            $("#pageloading").hide();
+		    });
+            function f_heightChanged(options){
+                if (accordion && options.middleHeight - 24 > 0){
+                    accordion.setHeight(options.middleHeight - 24);
+                }
+            }
+		</SCRIPT>
+	</body>
+</html>

@@ -1,0 +1,10 @@
+<#assign ctx=(rc.getContextPath())!''>
+<#if list??>
+<table class="table table-bordered">
+  <tbody>
+	<#list list as item>
+		<tr><td></td><#list (item.entrySet()) as entry><td>${entry.key}-${entry.value}</td></#list></tr>
+	</#list>
+  </tbody>
+</table>
+</#if>
